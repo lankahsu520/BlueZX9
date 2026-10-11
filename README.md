@@ -1091,4 +1091,4 @@ export                                            Print environment variables
 
 # License
 
-> [BlueZX9](https://github.com/lankahsu520/BlueZX9) is under the New BSD License (BSD-3-Clause).
+> [BlueZX9](https://github.com/lankahsu520/BlueZX9) is based on [BlueZ](http://www.bluez.org/).
