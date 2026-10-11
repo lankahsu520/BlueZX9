@@ -1,28 +1,29 @@
 # 1. Overview
-BlueZX9 is based on [BlueZ](http://www.bluez.org/) (bluez-5.56).
-
-It wrapped all features of bluetoothctl and provides some callback functions.
-
-You can create a noninteractive daemon easily.
+> BlueZX9 is based on [BlueZ](http://www.bluez.org/) (bluez-5.56).
+>
+> It wrapped all features of bluetoothctl and provides some callback functions.
+>
+> You can create a noninteractive daemon easily.
 
 # 2. Depend on
 
-- [utilx9](https://github.com/lankahsu520/utilx9)
-- [BlueZ](http://www.bluez.org)
+## - [utilx9](https://github.com/lankahsu520/utilx9)
+## - [BlueZ](http://www.bluez.org/)
+> [Main BlueZ tree - GitHub](https://github.com/bluez/bluez)
 
 # 3. Current Status
 
 
 
 # 4. Build
-   ```
+   ```bash
 $ make
    ```
 
 # 5. Example or Usage
-- bluetoothctl_clone - it is the same as bluetoothctl.
+#### - bluetoothctl_clone - it is the same as bluetoothctl.
 
-- bluezx9_123 - a daemon.
+#### - bluezx9_123 - a daemon.
 
 ```bash
 $ ./bluezx9_123 -d3
@@ -32,17 +33,13 @@ $ ./bluezx9_123 -d3
 #define UUID16_LANKAHSU520_SERVICE_F999           0xF999
 #define UUID16_LANKAHSU520_CHRC_F900              0xF900
 #define UUID16_LANKAHSU520_CHRC_F901              0xF901
-
 ```
 
-# 6. License
-BlueZX9 is based on [BlueZ](http://www.bluez.org/).
 
+# 6. Documentation
+> Run an example and read it.
 
-# 7. Documentation
-Run an example and read it.
-
-## 7.1. TestCase A
+## 6.1. TestCase A
 
 ```mermaid
 sequenceDiagram
@@ -57,7 +54,7 @@ sequenceDiagram
 
 ```
 
-## 7.2. TestCase B
+## 6.2. TestCase B
 
 ```mermaid
 flowchart LR
@@ -92,7 +89,7 @@ export BLUEZX9_COMMAND="debug"
 ./dbusx_456 -e "$BLUEZX9_COMMAND"
 ```
 
-## 7.3. TestCase C
+## 6.3. TestCase C
 
 ```mermaid
 sequenceDiagram
@@ -118,237 +115,11 @@ export BLUEZX9_COMMAND="debug"
 
 # Appendix
 
-# I. BlueZX9
+# I. Study
 
-## I.1. bluetoothctl_clone
+# II. Debug
 
-### II.1.1. Usage
-
-```bash
-Commands:
-        repeater        Repeater
-        debug           Set Debug Level 0~4
-        list            List available controllers
-        show            Controller information
-        select          Select default controller
-        devices         List available devices
-        paired-devices  List paired devices
-        system-alias    Set controller alias
-        reset-alias     Reset controller alias
-        power           Set controller power
-        pairable        Set controller pairable mode
-        discoverable    Set controller discoverable mode
-        discoverable-timeout    Set discoverable timeout
-        agent           Enable/disable agent with given capability
-        default-agent   Set agent as the default one
-        advertise       Enable/disable advertising with given type
-        set-alias       Set device alias
-        scan            Scan for devices
-        info            Device information
-        pair            Pair with device
-        cancel-pairing  Cancel pairing with device
-        trust           Trust device
-        untrust         Untrust device
-        block           Block device
-        unblock         Unblock device
-        remove          Remove device
-        connect         Connect device
-        disconnect      Disconnect device
-
-        advertise.:
-                uuids           Set/Get advertise uuids
-                service         Set/Get advertise service data
-                manufacturer    Set/Get advertise manufacturer data
-                data            Set/Get advertise data
-                discoverable    Set/Get advertise discoverable
-                discoverable-timeout    Set/Get advertise discoverable timeout
-                tx-power        Show/Enable/Disable TX power to be advertised
-                name            Configure local name to be advertised
-                appearance      Configure custom appearance to be advertised
-                duration        Set/Get advertise duration
-                timeout         Set/Get advertise timeout
-                secondary       Set/Get advertise secondary channel
-                clear           Clear advertise config
-
-        monitor.:
-                set-rssi-threshold      Set RSSI threshold parameter
-                set-rssi-timeout        Set RSSI timeout parameter
-                set-rssi-sampling-period        Set RSSI sampling period parameter
-                add-or-pattern  Register 'or pattern' type monitor with the specified RSSI parameters
-                get-pattern     Get advertisement monitor
-                remove-pattern  Remove advertisement monitor
-                get-supported-info      Get advertisement manager supported features and supported monitor types
-                print-usage     Print the command usage
-
-        scan.:
-                uuids           Set/Get UUIDs filter
-                rssi            Set/Get RSSI filter, and clears pathloss
-                pathloss        Set/Get Pathloss filter, and clears RSSI
-                transport       Set/Get transport filter
-                duplicate-data  Set/Get duplicate data filter
-                discoverable    Set/Get discoverable filter
-                pattern         Set/Get pattern filter
-                clear           Clears discovery filter.
-
-        gatt.:
-                read_chrc       Read characteristic value
-                list-attributes List attributes
-                select-attribute        Select attribute
-                attribute-info  Select attribute
-                read            Read attribute value
-                write           Write attribute value
-                push            Push a file
-                stop            Stop pushing
-                acquire-write   Acquire Write file descriptor
-                release-write   Release Write file descriptor
-                acquire-notify  Acquire Notify file descriptor
-                release-notify  Release Notify file descriptor
-                notify          Notify attribute value
-                clone           Clone a device or attribute
-                register-application    Register profile to connect
-                unregister-application  Unregister profile
-                register-service        Register application service.
-                unregister-service      Unregister application service
-                register-includes       Register as Included service in.
-                unregister-includes     Unregister Included service.
-                register-characteristic Register application characteristic
-                unregister-characteristic       Unregister application characteristic
-                register-descriptor     Register application descriptor
-                unregister-descriptor   Unregister application descriptor
-
-```
-
-# II. [BlueZ](http://www.bluez.org/)
-
-## II.1. [Main BlueZ tree - GitHub](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwihnYTJ7734AhXXAaYKHXNJAEUQFnoECAUQAQ&url=https%3A%2F%2Fgithub.com%2Fbluez%2Fbluez&usg=AOvVaw0MThZWOGRFpL3nnm3V_1Hc)
-## II.2. bluetoothctl
-
-### II.2.1. Usage
-
-```bash
-$ bluetoothctl --help
-bluetoothctl ver 5.53
-Usage:
-        bluetoothctl [--options] [commands]
-Options:
-        --agent         Register agent handler: <capability>
-        --monitor       Enable monitor output
-        --timeout       Timeout in seconds for non-interactive mode
-        --version       Display version
-        --help          Display help
-Commands:
-        list            List available controllers
-        show            Controller information
-        select          Select default controller
-        devices         List available devices
-        paired-devices  List paired devices
-        system-alias    Set controller alias
-        reset-alias     Reset controller alias
-        power           Set controller power
-        pairable        Set controller pairable mode
-        discoverable    Set controller discoverable mode
-        discoverable-timeout    Set discoverable timeout
-        agent           Enable/disable agent with given capability
-        default-agent   Set agent as the default one
-        advertise       Enable/disable advertising with given type
-        set-alias       Set device alias
-        scan            Scan for devices
-        info            Device information
-        pair            Pair with device
-        trust           Trust device
-        untrust         Untrust device
-        block           Block device
-        unblock         Unblock device
-        remove          Remove device
-        connect         Connect device
-        disconnect      Disconnect device
-
-        advertise.:
-                uuids           Set/Get advertise uuids
-                service         Set/Get advertise service data
-                manufacturer    Set/Get advertise manufacturer data
-                data            Set/Get advertise data
-                discoverable    Set/Get advertise discoverable
-                discoverable-timeout    Set/Get advertise discoverable timeout
-                tx-power        Show/Enable/Disable TX power to be advertised
-                name            Configure local name to be advertised
-                appearance      Configure custom appearance to be advertised
-                duration        Set/Get advertise duration
-                timeout         Set/Get advertise timeout
-                secondary       Set/Get advertise secondary channel
-                clear           Clear advertise config
-
-        scan.:
-                uuids           Set/Get UUIDs filter
-                rssi            Set/Get RSSI filter, and clears pathloss
-                pathloss        Set/Get Pathloss filter, and clears RSSI
-                transport       Set/Get transport filter
-                duplicate-data  Set/Get duplicate data filter
-                discoverable    Set/Get discoverable filter
-                clear           Clears discovery filter.
-
-        gatt.:
-                list-attributes List attributes
-                select-attribute        Select attribute
-                attribute-info  Select attribute
-                read            Read attribute value
-                write           Write attribute value
-                acquire-write   Acquire Write file descriptor
-                release-write   Release Write file descriptor
-                acquire-notify  Acquire Notify file descriptor
-                release-notify  Release Notify file descriptor
-                notify          Notify attribute value
-                clone           Clone a device or attribute
-                register-application    Register profile to connect
-                unregister-application  Unregister profile
-                register-service        Register application service.
-                unregister-service      Unregister application service
-                register-includes       Register as Included service in.
-                unregister-includes     Unregister Included service.
-                register-characteristic Register application characteristic
-                unregister-characteristic       Unregister application characteristic
-                register-descriptor     Register application descriptor
-                unregister-descriptor   Unregister application descriptor
-
-```
-
-### II.2.2. Menu gatt
-
-```bash
-Menu gatt:
-Available commands:
--------------------
-list-attributes [dev/local]                       List attributes
-select-attribute <attribute/UUID>                 Select attribute
-attribute-info [attribute/UUID]                   Select attribute
-read [offset]                                     Read attribute value
-write <data=xx xx ...> [offset] [type]            Write attribute value
-acquire-write                                     Acquire Write file descriptor
-release-write                                     Release Write file descriptor
-acquire-notify                                    Acquire Notify file descriptor
-release-notify                                    Release Notify file descriptor
-notify <on/off>                                   Notify attribute value
-clone [dev/attribute/UUID]                        Clone a device or attribute
-register-application [UUID ...]                   Register profile to connect
-unregister-application                            Unregister profile
-register-service <UUID> [handle]                  Register application service.
-unregister-service <UUID/object>                  Unregister application service
-register-includes <UUID> [handle]                 Register as Included service in.
-unregister-includes <Service-UUID><Inc-UUID>      Unregister Included service.
-register-characteristic <UUID> <Flags=read,write,notify...> [handle] Register application characteristic
-unregister-characteristic <UUID/object>           Unregister application characteristic
-register-descriptor <UUID> <Flags=read,write...> [handle] Register application descriptor
-unregister-descriptor <UUID/object>               Unregister application descriptor
-back                                              Return to main menu
-version                                           Display version
-quit                                              Quit program
-exit                                              Quit program
-help                                              Display help about this program
-export                                            Print environment variables
-
-```
-
-## II.3. D-Bus Diagram
+## II.1. D-Bus Diagram
 
 ```mermaid
 flowchart LR
@@ -1093,4 +864,231 @@ method return time=1662016254.744202 sender=org.freedesktop.DBus -> destination=
 
 ````
 
-# 
+# III. Glossary
+
+# IV. Tool Usage
+
+## IV.1. bluetoothctl_clone Usage
+
+```bash
+Commands:
+        repeater        Repeater
+        debug           Set Debug Level 0~4
+        list            List available controllers
+        show            Controller information
+        select          Select default controller
+        devices         List available devices
+        paired-devices  List paired devices
+        system-alias    Set controller alias
+        reset-alias     Reset controller alias
+        power           Set controller power
+        pairable        Set controller pairable mode
+        discoverable    Set controller discoverable mode
+        discoverable-timeout    Set discoverable timeout
+        agent           Enable/disable agent with given capability
+        default-agent   Set agent as the default one
+        advertise       Enable/disable advertising with given type
+        set-alias       Set device alias
+        scan            Scan for devices
+        info            Device information
+        pair            Pair with device
+        cancel-pairing  Cancel pairing with device
+        trust           Trust device
+        untrust         Untrust device
+        block           Block device
+        unblock         Unblock device
+        remove          Remove device
+        connect         Connect device
+        disconnect      Disconnect device
+
+        advertise.:
+                uuids           Set/Get advertise uuids
+                service         Set/Get advertise service data
+                manufacturer    Set/Get advertise manufacturer data
+                data            Set/Get advertise data
+                discoverable    Set/Get advertise discoverable
+                discoverable-timeout    Set/Get advertise discoverable timeout
+                tx-power        Show/Enable/Disable TX power to be advertised
+                name            Configure local name to be advertised
+                appearance      Configure custom appearance to be advertised
+                duration        Set/Get advertise duration
+                timeout         Set/Get advertise timeout
+                secondary       Set/Get advertise secondary channel
+                clear           Clear advertise config
+
+        monitor.:
+                set-rssi-threshold      Set RSSI threshold parameter
+                set-rssi-timeout        Set RSSI timeout parameter
+                set-rssi-sampling-period        Set RSSI sampling period parameter
+                add-or-pattern  Register 'or pattern' type monitor with the specified RSSI parameters
+                get-pattern     Get advertisement monitor
+                remove-pattern  Remove advertisement monitor
+                get-supported-info      Get advertisement manager supported features and supported monitor types
+                print-usage     Print the command usage
+
+        scan.:
+                uuids           Set/Get UUIDs filter
+                rssi            Set/Get RSSI filter, and clears pathloss
+                pathloss        Set/Get Pathloss filter, and clears RSSI
+                transport       Set/Get transport filter
+                duplicate-data  Set/Get duplicate data filter
+                discoverable    Set/Get discoverable filter
+                pattern         Set/Get pattern filter
+                clear           Clears discovery filter.
+
+        gatt.:
+                read_chrc       Read characteristic value
+                list-attributes List attributes
+                select-attribute        Select attribute
+                attribute-info  Select attribute
+                read            Read attribute value
+                write           Write attribute value
+                push            Push a file
+                stop            Stop pushing
+                acquire-write   Acquire Write file descriptor
+                release-write   Release Write file descriptor
+                acquire-notify  Acquire Notify file descriptor
+                release-notify  Release Notify file descriptor
+                notify          Notify attribute value
+                clone           Clone a device or attribute
+                register-application    Register profile to connect
+                unregister-application  Unregister profile
+                register-service        Register application service.
+                unregister-service      Unregister application service
+                register-includes       Register as Included service in.
+                unregister-includes     Unregister Included service.
+                register-characteristic Register application characteristic
+                unregister-characteristic       Unregister application characteristic
+                register-descriptor     Register application descriptor
+                unregister-descriptor   Unregister application descriptor
+
+```
+
+## IV.2. bluetoothctl Usage
+
+```bash
+$ bluetoothctl --help
+bluetoothctl ver 5.53
+Usage:
+        bluetoothctl [--options] [commands]
+Options:
+        --agent         Register agent handler: <capability>
+        --monitor       Enable monitor output
+        --timeout       Timeout in seconds for non-interactive mode
+        --version       Display version
+        --help          Display help
+Commands:
+        list            List available controllers
+        show            Controller information
+        select          Select default controller
+        devices         List available devices
+        paired-devices  List paired devices
+        system-alias    Set controller alias
+        reset-alias     Reset controller alias
+        power           Set controller power
+        pairable        Set controller pairable mode
+        discoverable    Set controller discoverable mode
+        discoverable-timeout    Set discoverable timeout
+        agent           Enable/disable agent with given capability
+        default-agent   Set agent as the default one
+        advertise       Enable/disable advertising with given type
+        set-alias       Set device alias
+        scan            Scan for devices
+        info            Device information
+        pair            Pair with device
+        trust           Trust device
+        untrust         Untrust device
+        block           Block device
+        unblock         Unblock device
+        remove          Remove device
+        connect         Connect device
+        disconnect      Disconnect device
+
+        advertise.:
+                uuids           Set/Get advertise uuids
+                service         Set/Get advertise service data
+                manufacturer    Set/Get advertise manufacturer data
+                data            Set/Get advertise data
+                discoverable    Set/Get advertise discoverable
+                discoverable-timeout    Set/Get advertise discoverable timeout
+                tx-power        Show/Enable/Disable TX power to be advertised
+                name            Configure local name to be advertised
+                appearance      Configure custom appearance to be advertised
+                duration        Set/Get advertise duration
+                timeout         Set/Get advertise timeout
+                secondary       Set/Get advertise secondary channel
+                clear           Clear advertise config
+
+        scan.:
+                uuids           Set/Get UUIDs filter
+                rssi            Set/Get RSSI filter, and clears pathloss
+                pathloss        Set/Get Pathloss filter, and clears RSSI
+                transport       Set/Get transport filter
+                duplicate-data  Set/Get duplicate data filter
+                discoverable    Set/Get discoverable filter
+                clear           Clears discovery filter.
+
+        gatt.:
+                list-attributes List attributes
+                select-attribute        Select attribute
+                attribute-info  Select attribute
+                read            Read attribute value
+                write           Write attribute value
+                acquire-write   Acquire Write file descriptor
+                release-write   Release Write file descriptor
+                acquire-notify  Acquire Notify file descriptor
+                release-notify  Release Notify file descriptor
+                notify          Notify attribute value
+                clone           Clone a device or attribute
+                register-application    Register profile to connect
+                unregister-application  Unregister profile
+                register-service        Register application service.
+                unregister-service      Unregister application service
+                register-includes       Register as Included service in.
+                unregister-includes     Unregister Included service.
+                register-characteristic Register application characteristic
+                unregister-characteristic       Unregister application characteristic
+                register-descriptor     Register application descriptor
+                unregister-descriptor   Unregister application descriptor
+```
+
+```bash
+Menu gatt:
+Available commands:
+-------------------
+list-attributes [dev/local]                       List attributes
+select-attribute <attribute/UUID>                 Select attribute
+attribute-info [attribute/UUID]                   Select attribute
+read [offset]                                     Read attribute value
+write <data=xx xx ...> [offset] [type]            Write attribute value
+acquire-write                                     Acquire Write file descriptor
+release-write                                     Release Write file descriptor
+acquire-notify                                    Acquire Notify file descriptor
+release-notify                                    Release Notify file descriptor
+notify <on/off>                                   Notify attribute value
+clone [dev/attribute/UUID]                        Clone a device or attribute
+register-application [UUID ...]                   Register profile to connect
+unregister-application                            Unregister profile
+register-service <UUID> [handle]                  Register application service.
+unregister-service <UUID/object>                  Unregister application service
+register-includes <UUID> [handle]                 Register as Included service in.
+unregister-includes <Service-UUID><Inc-UUID>      Unregister Included service.
+register-characteristic <UUID> <Flags=read,write,notify...> [handle] Register application characteristic
+unregister-characteristic <UUID/object>           Unregister application characteristic
+register-descriptor <UUID> <Flags=read,write...> [handle] Register application descriptor
+unregister-descriptor <UUID/object>               Unregister application descriptor
+back                                              Return to main menu
+version                                           Display version
+quit                                              Quit program
+exit                                              Quit program
+help                                              Display help about this program
+export                                            Print environment variables
+```
+
+# Author
+
+> Created and designed by [Lanka Hsu](lankahsu@gmail.com).
+
+# License
+
+> [BlueZX9](https://github.com/lankahsu520/BlueZX9) is under the New BSD License (BSD-3-Clause).
