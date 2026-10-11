@@ -21,9 +21,9 @@ $ make
    ```
 
 # 5. Example or Usage
-#### - bluetoothctl_clone - it is the same as bluetoothctl.
+## - bluetoothctl_clone - it is the same as bluetoothctl.
 
-#### - bluezx9_123 - a daemon.
+## - bluezx9_123 - a daemon.
 
 ```bash
 $ ./bluezx9_123 -d3
@@ -1092,3 +1092,4 @@ export                                            Print environment variables
 # License
 
 > [BlueZX9](https://github.com/lankahsu520/BlueZX9) is based on [BlueZ](http://www.bluez.org/).
+
