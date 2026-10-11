@@ -39,21 +39,21 @@ typedef int exec_fn(int argc, char *argv[], void *user_data);
 //******************************************************************************
 //** function **
 //******************************************************************************
-GList *bluezx_gatt_local_services_get(void);
-GList *bluezx_gatt_services_get(void);
-GList *bluezx_gatt_characteristics_get(void);
-GList *bluezx_gatt_descriptors_get(void);;
-GList *bluezx_gatt_managers_get(void);
-GList *bluezx_gatt_uuids_get(void);
-struct chrc *bluezx_gatt_read_chrc(char *service, char *chrc);
+GList *bluezx9_gatt_local_services_get(void);
+GList *bluezx9_gatt_services_get(void);
+GList *bluezx9_gatt_characteristics_get(void);
+GList *bluezx9_gatt_descriptors_get(void);;
+GList *bluezx9_gatt_managers_get(void);
+GList *bluezx9_gatt_uuids_get(void);
+struct chrc *bluezx9_gatt_read_chrc(char *service, char *chrc);
 
-struct adapter *bluezx_ctrl_get(void);
-GDBusProxy *bluezx_dev_get(void);
-GDBusProxy *bluezx_attr_get(void);
-GList *bluezx_ctrl_list_get(void);
-GList *bluezx_battery_proxies_get(void);
+struct adapter *bluezx9_ctrl_get(void);
+GDBusProxy *bluezx9_dev_get(void);
+GDBusProxy *bluezx9_attr_get(void);
+GList *bluezx9_ctrl_list_get(void);
+GList *bluezx9_battery_proxies_get(void);
 
-int bluezx_ctrl_property_get(const char *name, char *value);
+int bluezx9_ctrl_property_get(const char *name, char *value);
 
 int bluetoothctl_start(int argc, char *argv[], void *user_data);
 

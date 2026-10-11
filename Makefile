@@ -15,9 +15,9 @@ LIBNAME_MOD =
 
 BLUEZ_VERSION=5.56
 BLUEZ=bluez-$(BLUEZ_VERSION)
-BLUEZX=
-BLUEZX_DIR=$(PWD)
-BLUEZ_DIR=$(BLUEZX_DIR)/$(BLUEZ)
+BLUEZX9=
+BLUEZX9_DIR=$(PWD)
+BLUEZ_DIR=$(BLUEZX9_DIR)/$(BLUEZ)
 
 #** CFLAGS & LDFLAGS **
 CXX_SET=.cpp
@@ -28,11 +28,11 @@ endif
 CFLAGS += $(CFLAGS_OTHERS) $(CFLAGS_CUSTOMER)
 
 CFLAGS += \
-					-DBLUEZX \
+					-DBLUEZX9 \
 					-DVERSION="\"$(BLUEZ_VERSION)\"" \
 					-include $(SDK_INC_DIR)/utilx9.h \
-					-include $(BLUEZX_DIR)/bluezx.h \
-					-I$(BLUEZX_DIR) \
+					-include $(BLUEZX9_DIR)/bluezx9.h \
+					-I$(BLUEZX9_DIR) \
 					-I$(BLUEZ_DIR) -I$(BLUEZ_DIR)/client -I$(BLUEZ_DIR)/lib \
 					-I./
 LDFLAGS += \
@@ -78,8 +78,8 @@ LIBXXX_OBJS += \
 							$(BLUEZ_DIR)/client/agent.o \
 							$(BLUEZ_DIR)/client/display.o \
 							$(BLUEZ_DIR)/client/gatt.o \
-							$(BLUEZX_DIR)/bluetoothctl_api.o \
-							$(BLUEZX_DIR)/bluezx.o
+							$(BLUEZX9_DIR)/bluetoothctl_api.o \
+							$(BLUEZX9_DIR)/bluezx9.o
 
 # cpp
 LIBXXX_OBJS += \
@@ -118,14 +118,14 @@ CLEAN_LIBS = $(LIBXXX_A) $(LIBXXX_SO) $(LIBXXX_MOD)
 
 #** Target (CLEAN_BINS) **
 CLEAN_BINS += \
-							$(BLUEZX_DIR)/bluetoothctl_clone
+							$(BLUEZX9_DIR)/bluetoothctl_clone
 
 # cpp
 CLEAN_BINS += \
 
 #** Target (DUMMY_BINS) **
 DUMMY_BINS += \
-							$(BLUEZX_DIR)/bluezx_123
+							$(BLUEZX9_DIR)/bluezx9_123
 
 # cpp
 DUMMY_BINS += \

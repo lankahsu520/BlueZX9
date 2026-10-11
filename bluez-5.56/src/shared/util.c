@@ -527,7 +527,7 @@ static const struct {
 	{ 0x2b29, "Client Supported Features"			},
 	{ 0x2b2A, "Database Hash"				},
 	/* vendor defined */
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	VENDOR_DEFINED_UUID16_TABLE
 #endif
 	{ 0xfeff, "GN Netcom"					},

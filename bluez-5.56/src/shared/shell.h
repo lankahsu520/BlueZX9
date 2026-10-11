@@ -56,7 +56,7 @@ struct bt_shell_opt {
 	const char **help;
 };
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 int shell_exec_helper(int argc, char *argv[], void *user_data);
 #endif
 

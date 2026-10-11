@@ -17,18 +17,18 @@
 
 #include "utilx9.h"
 
-#define TAG "bluezx_123"
+#define TAG "bluezx9_123"
 
-#define USE_BLUEZX
+#define USE_BLUEZX9
 #define USE_DBUSX_API
 
 // ** app **
 static int is_quit = 0;
 char save_path[LEN_OF_BUF256]="/tmp";
 
-#ifdef USE_BLUEZX
-static BlueZX_t bluezx_123 = {
-	.name = "bluezx_123",
+#ifdef USE_BLUEZX9
+static BlueZX9_t bluezx9_123 = {
+	.name = "bluezx9_123",
 
 	.isfree = 0,
 	.isinit = 0,
@@ -49,34 +49,34 @@ void simple_gatt_chrc_write_value_cb(void *user_data, struct chrc *chrc, char *d
 
 void simple_client_ready_cb(GDBusClient *client, void *user_data)
 {
-	//bluezx_exec_helper(shell_exec_helper, &bluezx_123, "show", NULL);
+	//bluezx9_exec_helper(shell_exec_helper, &bluezx9_123, "show", NULL);
 	{
 		char val[LEN_OF_BUF128] = "";
-		bluezx_ctrl_property_get("Pairable", val);
+		bluezx9_ctrl_property_get("Pairable", val);
 		DBG_ER_LN("(Pairable, val: %s)", val);
-		bluezx_ctrl_property_get("Address", val);
+		bluezx9_ctrl_property_get("Address", val);
 		DBG_ER_LN("(Address, val: %s)" , val);
 	}
 
 	char uuid[LEN_OF_UUID] = "";
 	SAFE_SPRINTF(uuid, "0x%04X", UUID16_LANKAHSU520_SERVICE_F999);
-	bluezx_exec_helper(shell_exec_helper, &bluezx_123, "gatt.register-service", uuid, NULL);
+	bluezx9_exec_helper(shell_exec_helper, &bluezx9_123, "gatt.register-service", uuid, NULL);
 
 	SAFE_SPRINTF(uuid, "0x%04X", UUID16_LANKAHSU520_CHRC_F900);
-	bluezx_exec_helper(shell_exec_helper, &bluezx_123, "gatt.register-characteristic", uuid, "read,write", NULL);
+	bluezx9_exec_helper(shell_exec_helper, &bluezx9_123, "gatt.register-characteristic", uuid, "read,write", NULL);
 
 	SAFE_SPRINTF(uuid, "0x%04X", UUID16_LANKAHSU520_CHRC_F901);
-	bluezx_exec_helper(shell_exec_helper, &bluezx_123, "gatt.register-characteristic", uuid, "read,write", NULL);
+	bluezx9_exec_helper(shell_exec_helper, &bluezx9_123, "gatt.register-characteristic", uuid, "read,write", NULL);
 
-	bluezx_exec_helper(shell_exec_helper, &bluezx_123, "gatt.register-application", NULL);
+	bluezx9_exec_helper(shell_exec_helper, &bluezx9_123, "gatt.register-application", NULL);
 
-	bluezx_exec_helper(shell_exec_helper, &bluezx_123, "advertise.name", "on", NULL);
-	bluezx_exec_helper(shell_exec_helper, &bluezx_123, "advertise.timeout", "60", NULL);
+	bluezx9_exec_helper(shell_exec_helper, &bluezx9_123, "advertise.name", "on", NULL);
+	bluezx9_exec_helper(shell_exec_helper, &bluezx9_123, "advertise.timeout", "60", NULL);
 
-	bluezx_exec_helper(shell_exec_helper, &bluezx_123, "advertise", "on", NULL);
+	bluezx9_exec_helper(shell_exec_helper, &bluezx9_123, "advertise", "on", NULL);
 }
 
-void bluezx_commander(char *command)
+void bluezx9_commander(char *command)
 {
 	int argc = 0;
 	char *argv[LEN_OF_BUF2048];
@@ -87,7 +87,7 @@ void bluezx_commander(char *command)
 	}
 
 	//ARGC_AND_ARGV_DUMP(argc-1, argv);
-	shell_exec_helper(argc-1, argv, &bluezx_123);
+	shell_exec_helper(argc-1, argv, &bluezx9_123);
 }
 
 #endif
@@ -129,10 +129,10 @@ DBusHandlerResult demo_method_cb(DBusConnection *connection, DBusMessage *messag
 	}
 
 	DBG_DB_LN("%s (val: %s)", DBG_TXT_GOT, val);
-#ifdef USE_BLUEZX
+#ifdef USE_BLUEZX9
 	if (val)
 	{
-		bluezx_commander(val);
+		bluezx9_commander(val);
 	}
 #endif
 
@@ -205,9 +205,9 @@ static void app_stop(void)
 		dbusx_thread_close(&dbusx_123);
 #endif
 
-#ifdef USE_BLUEZX
-		bluezx_thread_stop(&bluezx_123);
-		bluezx_thread_close(&bluezx_123);
+#ifdef USE_BLUEZX9
+		bluezx9_thread_stop(&bluezx9_123);
+		bluezx9_thread_close(&bluezx9_123);
 #endif
 	}
 }
@@ -220,10 +220,10 @@ static void app_loop(void)
 
 #ifdef USE_DBUSX_API
 	{
-		bluezx_123.gatt_chrc_write_value_cb = simple_gatt_chrc_write_value_cb;
-		bluezx_123.client_ready_cb = simple_client_ready_cb;
+		bluezx9_123.gatt_chrc_write_value_cb = simple_gatt_chrc_write_value_cb;
+		bluezx9_123.client_ready_cb = simple_client_ready_cb;
 
-		bluezx_thread_init(&bluezx_123, save_path);
+		bluezx9_thread_init(&bluezx9_123, save_path);
 
 		static int count = 0;
 		while (app_quit()==0)
@@ -231,8 +231,8 @@ static void app_loop(void)
 			count++;
 			if (count == 5)
 			{
-				bluezx_ctrl_pairable_set("on");
-				bluezx_ctrl_pairable_set("off");
+				bluezx9_ctrl_pairable_set("on");
+				bluezx9_ctrl_pairable_set("off");
 			}
 			sleep(1);
 		}

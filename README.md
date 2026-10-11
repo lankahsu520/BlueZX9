@@ -1,5 +1,5 @@
 # 1. Overview
-BlueZX is based on [BlueZ](http://www.bluez.org/) (bluez-5.56).
+BlueZX9 is based on [BlueZ](http://www.bluez.org/) (bluez-5.56).
 
 It wrapped all features of bluetoothctl and provides some callback functions.
 
@@ -22,10 +22,10 @@ $ make
 # 5. Example or Usage
 - bluetoothctl_clone - it is the same as bluetoothctl.
 
-- bluezx_123 - a daemon.
+- bluezx9_123 - a daemon.
 
 ```bash
-$ ./bluezx_123 -d3
+$ ./bluezx9_123 -d3
 ```
 
 ```c
@@ -36,7 +36,7 @@ $ ./bluezx_123 -d3
 ```
 
 # 6. License
-BlueZX is based on [BlueZ](http://www.bluez.org/).
+BlueZX9 is based on [BlueZ](http://www.bluez.org/).
 
 
 # 7. Documentation
@@ -47,13 +47,13 @@ Run an example and read it.
 ```mermaid
 sequenceDiagram
 	participant Phone
-	participant bluezx_123
+	participant bluezx9_123
 
-	Phone->>bluezx_123: WRITE Characteristic-0xF900 data: .. .. .. ...
-	bluezx_123->>bluezx_123: simple_gatt_chrc_write_value_cb, set chrc->value as 1000
+	Phone->>bluezx9_123: WRITE Characteristic-0xF900 data: .. .. .. ...
+	bluezx9_123->>bluezx9_123: simple_gatt_chrc_write_value_cb, set chrc->value as 1000
 	
-	Phone->>bluezx_123: READ Characteristic-0xF900 data: .. .. 
-	bluezx_123->>Phone: return chrc->value (1000=0xF901)
+	Phone->>bluezx9_123: READ Characteristic-0xF900 data: .. .. 
+	bluezx9_123->>Phone: return chrc->value (1000=0xF901)
 
 ```
 
@@ -61,35 +61,35 @@ sequenceDiagram
 
 ```mermaid
 flowchart LR
-	dbusx_456 <--> |D-Bus / com.github.lankahsu520| bluezx_123
+	dbusx_456 <--> |D-Bus / com.github.lankahsu520| bluezx9_123
 
 ```
 
 ```bash
-export BLUEZX_COMMAND="scan&on"
-export BLUEZX_COMMAND="scan&off"
-export BLUEZX_COMMAND="advertise.name&on"
-export BLUEZX_COMMAND="advertise.timeout&120"
-export BLUEZX_COMMAND="advertise&on"
+export BLUEZX9_COMMAND="scan&on"
+export BLUEZX9_COMMAND="scan&off"
+export BLUEZX9_COMMAND="advertise.name&on"
+export BLUEZX9_COMMAND="advertise.timeout&120"
+export BLUEZX9_COMMAND="advertise&on"
 
-export BLUEZX_COMMAND="pair&90:E8:68:85:9A:0A"
-export BLUEZX_COMMAND="connect&90:E8:68:85:9A:0A"
-export BLUEZX_COMMAND="disconnect&90:E8:68:85:9A:0A"
+export BLUEZX9_COMMAND="pair&90:E8:68:85:9A:0A"
+export BLUEZX9_COMMAND="connect&90:E8:68:85:9A:0A"
+export BLUEZX9_COMMAND="disconnect&90:E8:68:85:9A:0A"
 
-export BLUEZX_COMMAND="gatt.list-attributes&90:E8:68:85:9A:0A"
-export BLUEZX_COMMAND="gatt.select-attribute&0000F999-0000-1000-8000-00805f9b34fb"
-export BLUEZX_COMMAND="gatt.select-attribute&0000F900-0000-1000-8000-00805f9b34fb"
-export BLUEZX_COMMAND="gatt.select-attribute&0000F901-0000-1000-8000-00805f9b34fb"
+export BLUEZX9_COMMAND="gatt.list-attributes&90:E8:68:85:9A:0A"
+export BLUEZX9_COMMAND="gatt.select-attribute&0000F999-0000-1000-8000-00805f9b34fb"
+export BLUEZX9_COMMAND="gatt.select-attribute&0000F900-0000-1000-8000-00805f9b34fb"
+export BLUEZX9_COMMAND="gatt.select-attribute&0000F901-0000-1000-8000-00805f9b34fb"
 
-export BLUEZX_COMMAND="gatt.write&0xFF 0xFE 0x7B 0x22 0x75 0x73 0x65 0x72 0x22 0x3A 0x22 0x6C 0x61 0x6E 0x6B 0x61 0x22 0x7D 0xFF 0xFF"
-export BLUEZX_COMMAND="gatt.write&0xFF 0xFE 0xFF 0xFF"
-export BLUEZX_COMMAND="gatt.write&0x1C 0x56"
-export BLUEZX_COMMAND="gatt.push&/work/codebase/testing.json"
-export BLUEZX_COMMAND="gatt.stop"
+export BLUEZX9_COMMAND="gatt.write&0xFF 0xFE 0x7B 0x22 0x75 0x73 0x65 0x72 0x22 0x3A 0x22 0x6C 0x61 0x6E 0x6B 0x61 0x22 0x7D 0xFF 0xFF"
+export BLUEZX9_COMMAND="gatt.write&0xFF 0xFE 0xFF 0xFF"
+export BLUEZX9_COMMAND="gatt.write&0x1C 0x56"
+export BLUEZX9_COMMAND="gatt.push&/work/codebase/testing.json"
+export BLUEZX9_COMMAND="gatt.stop"
 
-export BLUEZX_COMMAND="debug"
+export BLUEZX9_COMMAND="debug"
 
-./dbusx_456 -e "$BLUEZX_COMMAND"
+./dbusx_456 -e "$BLUEZX9_COMMAND"
 ```
 
 ## 7.3. TestCase C
@@ -97,28 +97,28 @@ export BLUEZX_COMMAND="debug"
 ```mermaid
 sequenceDiagram
 	participant dbusx_456 as dbusx_456 (pic1)
-	participant bluezx_123a as bluezx_123 (pic1)
-	participant bluezx_123b as bluezx_123 (pic2)
+	participant bluezx9_123a as bluezx9_123 (pic1)
+	participant bluezx9_123b as bluezx9_123 (pic2)
 
-	dbusx_456-->>bluezx_123a:PUSH a file
+	dbusx_456-->>bluezx9_123a:PUSH a file
   loop PUSH a file
-	bluezx_123a->>bluezx_123b: WRITE Characteristic-0xF900 data: .. .. .. ...
+	bluezx9_123a->>bluezx9_123b: WRITE Characteristic-0xF900 data: .. .. .. ...
   end
 	
 ```
 
 ```bash
-export BLUEZX_COMMAND="gatt.select-attribute&0000F900-0000-1000-8000-00805f9b34fb"
-export BLUEZX_COMMAND="gatt.push&/work/codebase/testing.json"
-export BLUEZX_COMMAND="gatt.stop"
-export BLUEZX_COMMAND="debug"
+export BLUEZX9_COMMAND="gatt.select-attribute&0000F900-0000-1000-8000-00805f9b34fb"
+export BLUEZX9_COMMAND="gatt.push&/work/codebase/testing.json"
+export BLUEZX9_COMMAND="gatt.stop"
+export BLUEZX9_COMMAND="debug"
 
-./dbusx_456 -e "$BLUEZX_COMMAND"
+./dbusx_456 -e "$BLUEZX9_COMMAND"
 ```
 
 # Appendix
 
-# I. BlueZX
+# I. BlueZX9
 
 ## I.1. bluetoothctl_clone
 
@@ -443,12 +443,12 @@ method return time=1662016254.741837 sender=org.freedesktop.DBus -> destination=
 ```
 
 ```bash
-export BLUEZX_COMMAND="\"type='signal',sender='org.freedesktop.DBus',path='/org/freedesktop/DBus',interface='org.freedesktop.DBus',member='NameOwnerChanged',arg0='org.bluez'\"
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND="\"type='signal',sender='org.freedesktop.DBus',path='/org/freedesktop/DBus',interface='org.freedesktop.DBus',member='NameOwnerChanged',arg0='org.bluez'\"
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH=""
+export BLUEZX9_OBJPATH=""
 
 export DBUS_PATH_XXX="/org/freedesktop/DBus"
 export DBUS_DEST_XXX="org.freedesktop.DBus"
@@ -472,12 +472,12 @@ method return time=1662016254.742020 sender=org.freedesktop.DBus -> destination=
 ```
 
 ```bash
-export BLUEZX_COMMAND="\"org.bluez\""
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND="\"org.bluez\""
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH=""
+export BLUEZX9_OBJPATH=""
 
 export DBUS_PATH_XXX="/org/freedesktop/DBus"
 export DBUS_DEST_XXX="org.freedesktop.DBus"
@@ -500,12 +500,12 @@ method return time=1662016254.742025 sender=org.freedesktop.DBus -> destination=
 ```
 
 ```bash
-export BLUEZX_COMMAND="\"type='signal',sender='org.bluez',path='/',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesAdded'\""
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND="\"type='signal',sender='org.bluez',path='/',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesAdded'\""
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH=""
+export BLUEZX9_OBJPATH=""
 
 export DBUS_PATH_XXX="/org/freedesktop/DBus"
 export DBUS_DEST_XXX="org.freedesktop.DBus"
@@ -528,12 +528,12 @@ method return time=1662016254.742050 sender=org.freedesktop.DBus -> destination=
 ```
 
 ```bash
-export BLUEZX_COMMAND="\"type='signal',sender='org.bluez',path='/',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesRemoved'\""
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND="\"type='signal',sender='org.bluez',path='/',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesRemoved'\""
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH=""
+export BLUEZX9_OBJPATH=""
 
 export DBUS_PATH_XXX="/org/freedesktop/DBus"
 export DBUS_DEST_XXX="org.freedesktop.DBus"
@@ -556,12 +556,12 @@ method return time=1662016254.742260 sender=org.freedesktop.DBus -> destination=
 ```
 
 ```bash
-export BLUEZX_COMMAND="\"type='signal',sender='org.bluez',path_namespace='/org/bluez'\""
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND="\"type='signal',sender='org.bluez',path_namespace='/org/bluez'\""
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH=""
+export BLUEZX9_OBJPATH=""
 
 export DBUS_PATH_XXX="/org/freedesktop/DBus"
 export DBUS_DEST_XXX="org.freedesktop.DBus"
@@ -889,12 +889,12 @@ method return time=1662016254.742651 sender=:1.135 -> destination=:1.268 serial=
 ```
 
 ```bash
-export BLUEZX_COMMAND=""
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND=""
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH=""
+export BLUEZX9_OBJPATH=""
 
 export DBUS_PATH_XXX="/"
 export DBUS_DEST_XXX="org.bluez"
@@ -917,12 +917,12 @@ method return time=1662016254.743059 sender=org.freedesktop.DBus -> destination=
 ```
 
 ```bash
-export BLUEZX_COMMAND="\"type='signal',sender='org.bluez',path='/org/bluez',interface='org.freedesktop.DBus.Properties',member='PropertiesChanged',arg0='org.bluez.AgentManager1'\""
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND="\"type='signal',sender='org.bluez',path='/org/bluez',interface='org.freedesktop.DBus.Properties',member='PropertiesChanged',arg0='org.bluez.AgentManager1'\""
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH=""
+export BLUEZX9_OBJPATH=""
 
 export DBUS_PATH_XXX="/org/freedesktop/DBus"
 export DBUS_DEST_XXX="org.freedesktop.DBus"
@@ -955,12 +955,12 @@ signal time=1662016254.743450 sender=:1.268 -> destination=(null destination) se
 ```
 
 ```bash
-export BLUEZX_COMMAND="\"{'org.freedesktop.DBus.Introspectable':'[]','org.bluez.Agent1':'[]'}\""
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND="\"{'org.freedesktop.DBus.Introspectable':'[]','org.bluez.Agent1':'[]'}\""
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH="/org/bluez/agent"
+export BLUEZX9_OBJPATH="/org/bluez/agent"
 
 export DBUS_PATH_XXX="/"
 export DBUS_DEST_XXX="org.freedesktop.DBus"
@@ -984,12 +984,12 @@ method return time=1662016254.743675 sender=:1.135 -> destination=:1.268 serial=
 ```
 
 ```bash
-export BLUEZX_COMMAND="\"\""
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND="\"\""
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH="/org/bluez/agent"
+export BLUEZX9_OBJPATH="/org/bluez/agent"
 
 export DBUS_PATH_XXX="/org/bluez"
 export DBUS_DEST_XXX="org.bluez"
@@ -1012,12 +1012,12 @@ method return time=1662016254.743488 sender=org.freedesktop.DBus -> destination=
 ```
 
 ```bash
-export BLUEZX_COMMAND="\"type='signal',sender='org.bluez',path='/org/bluez',interface='org.freedesktop.DBus.Properties',member='PropertiesChanged',arg0='org.bluez.ProfileManager1'\""
-export BLUEZX_STRING="$BLUEZX_COMMAND"
-export BLUEZX_ARRAY=""
-export BLUEZX_DICT=""
+export BLUEZX9_COMMAND="\"type='signal',sender='org.bluez',path='/org/bluez',interface='org.freedesktop.DBus.Properties',member='PropertiesChanged',arg0='org.bluez.ProfileManager1'\""
+export BLUEZX9_STRING="$BLUEZX9_COMMAND"
+export BLUEZX9_ARRAY=""
+export BLUEZX9_DICT=""
 
-export BLUEZX_OBJPATH=""
+export BLUEZX9_OBJPATH=""
 
 export DBUS_PATH_XXX="/org/freedesktop/DBus"
 export DBUS_DEST_XXX="org.freedesktop.DBus"

@@ -10,7 +10,7 @@
 #ifndef __GATT_H__
 #define __GATT_H__
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 #define APP_PATH "/org/bluez/app"
 #define DEVICE_INTERFACE "org.bluez.Device1"
 #define PROFILE_INTERFACE "org.bluez.GattProfile1"
@@ -47,7 +47,7 @@ struct chrc {
 	GList *descs;
 	size_t value_len;
 	unsigned int max_val_len;
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	QBUF_t qbuf;
 	union
 	{
@@ -90,7 +90,7 @@ char *gatt_attribute_generator(const char *text, int state);
 
 void gatt_read_attribute(GDBusProxy *proxy, int argc, char *argv[]);
 void gatt_write_attribute(GDBusProxy *proxy, int argc, char *argv[]);
-#ifdef BLUEZX
+#ifdef BLUEZX9
 void gatt_push_attribute(GDBusProxy *proxy, int argc, char *argv[]);
 void gatt_stop_attribute(GDBusProxy *proxy, int argc, char *argv[]);
 #endif
@@ -130,7 +130,7 @@ void gatt_register_include(DBusConnection *conn, GDBusProxy *proxy,
 void gatt_unregister_include(DBusConnection *conn, GDBusProxy *proxy,
 						int argc, char *argv[]);
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 void chrc_set_short(uint16_t value16, void *user_data);
 #endif
 

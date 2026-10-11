@@ -12,8 +12,8 @@
  * KIND, either express or implied.
  *
  ***************************************************************************/
-#ifndef __BLUEZX_H__
-#define __BLUEZX_H__
+#ifndef __BLUEZX9_H__
+#define __BLUEZX9_H__
 
 //******************************************************************************
 //** include **
@@ -123,7 +123,7 @@ typedef struct CTRL_Struct
 	int pairable;
 } CTRL_t;
 
-typedef struct BlueZX_Struct
+typedef struct BlueZX9_Struct
 {
 	char name[LEN_OF_NAME32];
 
@@ -160,51 +160,51 @@ typedef struct BlueZX_Struct
 
 	CTRL_t ctrl;
 	void *data;
-} BlueZX_t;
+} BlueZX9_t;
 
 //******************************************************************************
 //** function **
 //******************************************************************************
-int bluezx_ctrl_pairable_set(char *str);
-void bluezx_ctrl_pairable_cb(char *str);
-void bluezx_ctrl_name_cb(char *name);
-void bluezx_ctrl_address_and_name_cb(char *address, char *name);
+int bluezx9_ctrl_pairable_set(char *str);
+void bluezx9_ctrl_pairable_cb(char *str);
+void bluezx9_ctrl_name_cb(char *name);
+void bluezx9_ctrl_address_and_name_cb(char *address, char *name);
 
-void bluezx_gatt_chrc_write_value_cb(struct chrc *chrc, char *device, char *link);
-void bluezx_gatt_application_registered_cb(void);
-void bluezx_gatt_register_service_cb(struct service *service);
-void bluezx_gatt_register_chrc_cb(struct chrc *chrc);
+void bluezx9_gatt_chrc_write_value_cb(struct chrc *chrc, char *device, char *link);
+void bluezx9_gatt_application_registered_cb(void);
+void bluezx9_gatt_register_service_cb(struct service *service);
+void bluezx9_gatt_register_chrc_cb(struct chrc *chrc);
 
-void bluezx_advertising_set(BlueZX_t *bluezx_req, int isadvertising);
-int bluezx_advertising(BlueZX_t *bluezx_req);
-void bluezx_advertising_registered_cb(void);
-void bluezx_advertising_unregistered_cb(void);
-void bluezx_advertising_released_cb(void);
+void bluezx9_advertising_set(BlueZX9_t *bluezx9_req, int isadvertising);
+int bluezx9_advertising(BlueZX9_t *bluezx9_req);
+void bluezx9_advertising_registered_cb(void);
+void bluezx9_advertising_unregistered_cb(void);
+void bluezx9_advertising_released_cb(void);
 
-void bluezx_agnet_set(BlueZX_t *bluezx_req, int isagent);
-int bluezx_agent(BlueZX_t *bluezx_req);
-void bluezx_agent_register_reply_cb(DBusMessage *message, void *user_data);
-void bluezx_agent_release_cb(void);
+void bluezx9_agnet_set(BlueZX9_t *bluezx9_req, int isagent);
+int bluezx9_agent(BlueZX9_t *bluezx9_req);
+void bluezx9_agent_register_reply_cb(DBusMessage *message, void *user_data);
+void bluezx9_agent_release_cb(void);
 
-void bluezx_client_ready_set(BlueZX_t *bluezx_req, READY_ID ready);
-READY_ID bluezx_client_ready(BlueZX_t *bluezx_req);
-void bluezx_client_ready_cb(GDBusClient *client, void *user_data);
+void bluezx9_client_ready_set(BlueZX9_t *bluezx9_req, READY_ID ready);
+READY_ID bluezx9_client_ready(BlueZX9_t *bluezx9_req);
+void bluezx9_client_ready_cb(GDBusClient *client, void *user_data);
 
-void bluezx_proxy_added_cb(GDBusProxy *proxy, void *user_data);
-void bluezx_proxy_removed_cb(GDBusProxy *proxy, void *user_data);
-void bluezx_property_changed_cb(GDBusProxy *proxy, const char *name, DBusMessageIter *iter, void *user_data);
+void bluezx9_proxy_added_cb(GDBusProxy *proxy, void *user_data);
+void bluezx9_proxy_removed_cb(GDBusProxy *proxy, void *user_data);
+void bluezx9_property_changed_cb(GDBusProxy *proxy, const char *name, DBusMessageIter *iter, void *user_data);
 
-void bluezx_connect_handler_cb(DBusConnection *connection, void *user_data);
-void bluezx_disconnect_handler_cb(DBusConnection *connection, void *user_data);
-void bluezx_message_handler_cb(DBusConnection *connection, DBusMessage *message, void *user_data);
+void bluezx9_connect_handler_cb(DBusConnection *connection, void *user_data);
+void bluezx9_disconnect_handler_cb(DBusConnection *connection, void *user_data);
+void bluezx9_message_handler_cb(DBusConnection *connection, DBusMessage *message, void *user_data);
 
-int bluezx_exec_helper(exec_fn cb, void *user_data, char *action, ...);
-void bluezx_ready_set(BlueZX_t *bluezx_req, READY_ID ready);
+int bluezx9_exec_helper(exec_fn cb, void *user_data, char *action, ...);
+void bluezx9_ready_set(BlueZX9_t *bluezx9_req, READY_ID ready);
 
-READY_ID bluezx_ready(BlueZX_t *bluezx_req);
+READY_ID bluezx9_ready(BlueZX9_t *bluezx9_req);
 
-int bluezx_thread_init(BlueZX_t *bluezx_req, char *save_path);
-void bluezx_thread_stop(BlueZX_t *bluezx_req);
-void bluezx_thread_close(BlueZX_t *bluezx_req);
+int bluezx9_thread_init(BlueZX9_t *bluezx9_req, char *save_path);
+void bluezx9_thread_stop(BlueZX9_t *bluezx9_req);
+void bluezx9_thread_close(BlueZX9_t *bluezx9_req);
 
 #endif

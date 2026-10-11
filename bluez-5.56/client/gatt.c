@@ -35,7 +35,7 @@
 #include "gdbus/gdbus.h"
 #include "gatt.h"
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 #else
 #define APP_PATH "/org/bluez/app"
 #define DEVICE_INTERFACE "org.bluez.Device1"
@@ -73,7 +73,7 @@ struct chrc {
 	GList *descs;
 	size_t value_len;
 	unsigned int max_val_len;
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	QBUF_t qbuf;
 	union
 	{
@@ -118,42 +118,42 @@ struct sock_io {
 static struct sock_io write_io;
 static struct sock_io notify_io;
 
-GList *bluezx_gatt_local_services_get(void)
+GList *bluezx9_gatt_local_services_get(void)
 {
 	return local_services;
 }
 
-GList *bluezx_gatt_services_get(void)
+GList *bluezx9_gatt_services_get(void)
 {
 	return services;
 }
 
-GList *bluezx_gatt_characteristics_get(void)
+GList *bluezx9_gatt_characteristics_get(void)
 {
 	return characteristics;
 }
 
-GList *bluezx_gatt_descriptors_get(void)
+GList *bluezx9_gatt_descriptors_get(void)
 {
 	return descriptors;
 }
 
-GList *bluezx_gatt_managers_get(void)
+GList *bluezx9_gatt_managers_get(void)
 {
 	return managers;
 }
 
-GList *bluezx_gatt_uuids_get(void)
+GList *bluezx9_gatt_uuids_get(void)
 {
 	return uuids;
 }
 
-struct chrc *bluezx_gatt_read_chrc(char *service_uuid, char *chrc_uuid)
+struct chrc *bluezx9_gatt_read_chrc(char *service_uuid, char *chrc_uuid)
 {
 	struct chrc *chrc_found = NULL;
 
 	{
-		GList *local_services = bluezx_gatt_local_services_get();
+		GList *local_services = bluezx9_gatt_local_services_get();
 		if (local_services)
 		{
 			GList *l;
@@ -325,7 +325,7 @@ void gatt_remove_service(GDBusProxy *proxy)
 						SERVICE_INTERFACE);
 }
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 #define PRINT_CHRC_DBG(s1,s2) \
 	({ \
 		struct chrc *chrc1 = (struct chrc *)s1; \
@@ -946,7 +946,7 @@ void gatt_write_attribute(GDBusProxy *proxy, int argc, char *argv[])
 	return bt_shell_noninteractive_quit(EXIT_FAILURE);
 }
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 static int is_push_stop = 0;
 static int is_pushing = 0;
 
@@ -1479,9 +1479,9 @@ static void register_app_reply(DBusMessage *message, void *user_data)
 	}
 
 	BT_SHELL_DBG("Application registered\n");
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	{
-		bluezx_gatt_application_registered_cb();
+		bluezx9_gatt_application_registered_cb();
 	}
 #endif
 
@@ -1665,7 +1665,7 @@ static void chrc_free(void *data)
 	g_free(chrc->path);
 	g_free(chrc->uuid);
 	g_strfreev(chrc->flags);
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	qbuf_free(&chrc->qbuf);
 #endif
 	g_free(chrc->value);
@@ -1806,7 +1806,7 @@ static const GDBusPropertyTable service_properties[] = {
 	{ }
 };
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 #else
 static void service_set_primary(const char *input, void *user_data)
 {
@@ -1860,9 +1860,9 @@ void gatt_register_service(DBusConnection *conn, GDBusProxy *proxy,
 
 	local_services = g_list_append(local_services, service);
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	DBG_WN_LN("(service->primary: %d)", service->primary);
-	bluezx_gatt_register_service_cb(service);
+	bluezx9_gatt_register_service_cb(service);
 #else
 	bt_shell_prompt_input(service->path, "Primary (yes/no):",
 		 service_set_primary, service);
@@ -2655,11 +2655,11 @@ static DBusMessage *chrc_write_value(DBusConnection *conn, DBusMessage *msg,
 		return g_dbus_create_reply(msg, DBUS_TYPE_INVALID);
 
 	size_t total = 0;
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	{
 		qbuf_write(&chrc->qbuf, (char*)value, value_len);
 
-		bluezx_gatt_chrc_write_value_cb(chrc, (char*)path_to_address(device), link);
+		bluezx9_gatt_chrc_write_value_cb(chrc, (char*)path_to_address(device), link);
 	}
 
 	total = qbuf_total(&chrc->qbuf);
@@ -2914,7 +2914,7 @@ static const GDBusMethodTable chrc_methods[] = {
 	{ }
 };
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 void chrc_set_short(uint16_t value16, void *user_data)
 {
 	struct chrc *chrc = user_data;
@@ -3009,11 +3009,11 @@ void gatt_register_chrc(DBusConnection *conn, GDBusProxy *proxy,
 
 	PRINT_CHRC_DBG(chrc, COLORED_NEW);
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	chrc_set_short(0, chrc);
 	qbuf_init(&chrc->qbuf, MAX_OF_CHRC_QBUF);
 
-	bluezx_gatt_register_chrc_cb(chrc);
+	bluezx9_gatt_register_chrc_cb(chrc);
 #else
 	bt_shell_prompt_input(chrc->path, "Enter value:", chrc_set_value, chrc);
 #endif

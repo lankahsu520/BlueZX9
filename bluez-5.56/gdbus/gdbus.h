@@ -396,7 +396,7 @@ gboolean g_dbus_client_set_proxy_handlers(GDBusClient *client,
 					GDBusPropertyFunction property_changed,
 					void *user_data);
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 struct GDBusClient {
 	int ref_count;
 	DBusConnection *dbus_conn;

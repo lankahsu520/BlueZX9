@@ -28,7 +28,7 @@
 #define DBUS_INTERFACE_OBJECT_MANAGER DBUS_INTERFACE_DBUS ".ObjectManager"
 #endif
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 #else
 struct GDBusClient {
 	int ref_count;

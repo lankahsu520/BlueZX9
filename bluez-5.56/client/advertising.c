@@ -85,8 +85,8 @@ static DBusMessage *release_advertising(DBusConnection *conn,
 	BT_SHELL_DBG("Advertising released\n");
 
 	ad_release(conn);
-#ifdef BLUEZX
-	bluezx_advertising_released_cb();
+#ifdef BLUEZX9
+	bluezx9_advertising_released_cb();
 #endif
 
 	return dbus_message_new_method_return(msg);
@@ -198,8 +198,8 @@ static void register_reply(DBusMessage *message, void *user_data)
 
 	if (dbus_set_error_from_message(&error, message) == FALSE) {
 		ad.registered = true;
-#ifdef BLUEZX
-		bluezx_advertising_registered_cb();
+#ifdef BLUEZX9
+		bluezx9_advertising_registered_cb();
 #endif
 		BT_SHELL_DBG("Advertising object registered\n");
 		print_ad();
@@ -513,8 +513,8 @@ static void unregister_reply(DBusMessage *message, void *user_data)
 
 	if (dbus_set_error_from_message(&error, message) == FALSE) {
 		ad.registered = false;
-#ifdef BLUEZX
-		bluezx_advertising_unregistered_cb();
+#ifdef BLUEZX9
+		bluezx9_advertising_unregistered_cb();
 #endif
 		BT_SHELL_DBG("Advertising object unregistered\n");
 		if (g_dbus_unregister_interface(conn, AD_PATH,

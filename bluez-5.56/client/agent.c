@@ -97,8 +97,8 @@ static void agent_release(DBusConnection *conn)
 		pending_message = NULL;
 	}
 
-#ifdef BLUEZX
-	bluezx_agent_release_cb();
+#ifdef BLUEZX9
+	bluezx9_agent_release_cb();
 #endif
 	agent_release_prompt();
 
@@ -308,8 +308,8 @@ static void register_agent_reply(DBusMessage *message, void *user_data)
 	if (dbus_set_error_from_message(&error, message) == FALSE) {
 		agent_registered = TRUE;
 		BT_SHELL_DBG("Agent registered\n");
-#ifdef BLUEZX
-		bluezx_agent_register_reply_cb(message, user_data);
+#ifdef BLUEZX9
+		bluezx9_agent_register_reply_cb(message, user_data);
 #endif
 	} else {
 		BT_SHELL_DBG("Failed to register agent: %s\n", error.name);

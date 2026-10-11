@@ -54,7 +54,7 @@ struct bt_shell_env {
 };
 
 static char *cmplt = "help";
-#ifdef BLUEZX
+#ifdef BLUEZX9
 static char *cmplt_repeater = "repeater";
 #endif
 
@@ -74,7 +74,7 @@ static struct {
 	bool zsh;
 	bool monitor;
 	int timeout;
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	int repeater;
 #endif
 	struct io *input;
@@ -495,7 +495,7 @@ static int submenu_exec(int argc, char *argv[])
 	return menu_exec(submenu->entries, argc, argv);
 }
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 int shell_exec_helper(int argc, char *argv[], void *user_data)
 {
 	int err;
@@ -1063,7 +1063,7 @@ static void rl_init(void)
 }
 
 static const struct option main_options[] = {
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	{ "repeater", no_argument, 0, 'r' },
 #endif
 	{ "version",	no_argument, 0, 'v' },
@@ -1088,7 +1088,7 @@ static void usage(int argc, char **argv, const struct bt_shell_opt *opt)
 
 	printf("\t--monitor \tEnable monitor output\n"
 		"\t--timeout \tTimeout in seconds for non-interactive mode\n"
-#ifdef BLUEZX
+#ifdef BLUEZX9
 		"\t--repeater \trepeater mode\n"
 #endif
 		"\t--version \tDisplay version\n"
@@ -1109,14 +1109,14 @@ void bt_shell_init(int argc, char **argv, const struct bt_shell_opt *opt)
 	if (opt) {
 		memcpy(options + offset, opt->options,
 				sizeof(struct option) * opt->optno);
-#ifdef BLUEZX
+#ifdef BLUEZX9
 		snprintf(optstr, sizeof(optstr), "+mrhvt:%s", opt->optstr);
 #else
 		snprintf(optstr, sizeof(optstr), "+mhvt:%s", opt->optstr);
 #endif
 	} else
 	{
-#ifdef BLUEZX
+#ifdef BLUEZX9
 		snprintf(optstr, sizeof(optstr), "+mrhvt:");
 #else
 		snprintf(optstr, sizeof(optstr), "+mhvt:");
@@ -1128,7 +1128,7 @@ void bt_shell_init(int argc, char **argv, const struct bt_shell_opt *opt)
 	else
 		data.name = strdup(++data.name);
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	if ( (argc>=2) && (SAFE_STRCMP(argv[1], "--repeater") ==0) )
 	{
 		data.repeater = 1;
@@ -1232,7 +1232,7 @@ int bt_shell_run(void)
 {
 	int status;
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	if (data.mode)
 	{
 		status = mainloop_run();
@@ -1286,7 +1286,7 @@ void bt_shell_noninteractive_quit(int status)
 	if (!data.mode || data.timeout)
 		return;
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	if (data.repeater==1)
 		return;
 #endif
@@ -1351,7 +1351,7 @@ bool bt_shell_attach(int fd)
 	if (data.input)
 		return false;
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	DBG_WN_LN("(data.repeater: %d)", data.repeater);
 	if (data.repeater)
 	{

@@ -79,32 +79,32 @@ static const char *ad_arguments[] = {
 	NULL
 };
 
-struct adapter *bluezx_ctrl_get(void)
+struct adapter *bluezx9_ctrl_get(void)
 {
 	return default_ctrl;
 }
 
-GDBusProxy *bluezx_dev_get(void)
+GDBusProxy *bluezx9_dev_get(void)
 {
 	return default_dev;
 }
 
-GDBusProxy *bluezx_attr_get(void)
+GDBusProxy *bluezx9_attr_get(void)
 {
 	return default_attr;
 }
 
-GList *bluezx_ctrl_list_get(void)
+GList *bluezx9_ctrl_list_get(void)
 {
 	return ctrl_list;
 }
 
-GList *bluezx_battery_proxies_get(void)
+GList *bluezx9_battery_proxies_get(void)
 {
 	return battery_proxies;
 }
 
-int bluezx_ctrl_property_get(const char *name, char *value)
+int bluezx9_ctrl_property_get(const char *name, char *value)
 {
 	int ret = 0;
 	struct adapter *adapter = default_ctrl;
@@ -236,16 +236,16 @@ int bluezx_ctrl_property_get(const char *name, char *value)
 	return ret;
 }
 
-#ifdef BLUEZX
-static void bluezx_cmd_read_chrc(int argc, char *argv[])
+#ifdef BLUEZX9
+static void bluezx9_cmd_read_chrc(int argc, char *argv[])
 {
 	if (argc==3)
 	{
-		bluezx_gatt_read_chrc(argv[1], argv[2]);
+		bluezx9_gatt_read_chrc(argv[1], argv[2]);
 	}
 	else
 	{
-		bluezx_gatt_read_chrc(NULL, NULL);
+		bluezx9_gatt_read_chrc(NULL, NULL);
 	}
 
 	return bt_shell_noninteractive_quit(EXIT_SUCCESS);
@@ -265,8 +265,8 @@ static void setup_standard_input(void)
 static void connect_handler(DBusConnection *connection, void *user_data)
 {
 	DBG_WN_LN(DBG_TXT_ENTER);
-#ifdef BLUEZX
-	bluezx_connect_handler_cb(connection, user_data);
+#ifdef BLUEZX9
+	bluezx9_connect_handler_cb(connection, user_data);
 #endif
 	bt_shell_set_prompt(PROMPT_ON);
 }
@@ -274,8 +274,8 @@ static void connect_handler(DBusConnection *connection, void *user_data)
 static void disconnect_handler(DBusConnection *connection, void *user_data)
 {
 	DBG_WN_LN(DBG_TXT_ENTER);
-#ifdef BLUEZX
-	bluezx_disconnect_handler_cb(connection, user_data);
+#ifdef BLUEZX9
+	bluezx9_disconnect_handler_cb(connection, user_data);
 #endif
 	bt_shell_detach();
 
@@ -304,8 +304,8 @@ static void print_adapter(GDBusProxy *proxy, const char *description)
 	else
 		name = "<unknown>";
 
-#ifdef BLUEZX
-	bluezx_ctrl_address_and_name_cb((char*)address, (char*)name);
+#ifdef BLUEZX9
+	bluezx9_ctrl_address_and_name_cb((char*)address, (char*)name);
 #endif
 	BT_SHELL_DBG("%s%s%sController %s %s %s\n",
 				description ? "[" : "",
@@ -732,8 +732,8 @@ static void proxy_added_cb(GDBusProxy *proxy, void *user_data)
 	interface = g_dbus_proxy_get_interface(proxy);
 
 	DBG_TR_LN("=>> (interface: %s)", interface);
-#ifdef BLUEZX
-	bluezx_proxy_added_cb(proxy, user_data);
+#ifdef BLUEZX9
+	bluezx9_proxy_added_cb(proxy, user_data);
 #endif
 
 if (!strcmp(interface, "org.bluez.Device1")) {
@@ -830,8 +830,8 @@ static void proxy_removed_cb(GDBusProxy *proxy, void *user_data)
 	interface = g_dbus_proxy_get_interface(proxy);
 
 	DBG_TR_LN("=>> (proxy: %p, interface: %s)", proxy, interface);
-#ifdef BLUEZX
-	bluezx_proxy_removed_cb(proxy, user_data);
+#ifdef BLUEZX9
+	bluezx9_proxy_removed_cb(proxy, user_data);
 #endif
 
 	if (!strcmp(interface, "org.bluez.Device1")) {
@@ -894,8 +894,8 @@ static void property_changed_cb(GDBusProxy *proxy, const char *name,
 	interface = g_dbus_proxy_get_interface(proxy);
 
 	DBG_TR_LN("=>> (proxy: %p, interface: %s, name: %s)", proxy, interface, name);
-#ifdef BLUEZX
-	bluezx_property_changed_cb(proxy, name, iter, user_data);
+#ifdef BLUEZX9
+	bluezx9_property_changed_cb(proxy, name, iter, user_data);
 #endif
 
 	if (!strcmp(interface, "org.bluez.Device1")) {
@@ -985,8 +985,8 @@ static void message_handler(DBusConnection *connection,
 					DBusMessage *message, void *user_data)
 {
 	DBG_TR_LN(DBG_TXT_ENTER);
-#ifdef BLUEZX
-	bluezx_message_handler_cb(connection, message, user_data);
+#ifdef BLUEZX9
+	bluezx9_message_handler_cb(connection, message, user_data);
 #endif
 	BT_SHELL_DBG("[SIGNAL] %s.%s\n", dbus_message_get_interface(message),
 					dbus_message_get_member(message));
@@ -1096,7 +1096,7 @@ static gboolean parse_argument(int argc, char *argv[], const char **arg_table,
 	return FALSE;
 }
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 static void cmd_repeater(int argc, char *argv[])
 {
 	return bt_shell_noninteractive_quit(EXIT_SUCCESS);
@@ -1280,8 +1280,8 @@ static void generic_callback_Alias(const DBusError *error, void *user_data)
 		return bt_shell_noninteractive_quit(EXIT_FAILURE);
 	} else {
 		BT_SHELL_DBG("Changing %s succeeded\n", str);
-#ifdef BLUEZX
-		bluezx_ctrl_name_cb((char*)str);
+#ifdef BLUEZX9
+		bluezx9_ctrl_name_cb((char*)str);
 #endif
 		return bt_shell_noninteractive_quit(EXIT_SUCCESS);
 	}
@@ -1296,8 +1296,8 @@ static void generic_callback_Pairable(const DBusError *error, void *user_data)
 		return bt_shell_noninteractive_quit(EXIT_FAILURE);
 	} else {
 		BT_SHELL_DBG("Changing %s succeeded\n", str);
-#ifdef BLUEZX
-		bluezx_ctrl_pairable_cb((char*)str);
+#ifdef BLUEZX9
+		bluezx9_ctrl_pairable_cb((char*)str);
 #endif
 		return bt_shell_noninteractive_quit(EXIT_SUCCESS);
 	}
@@ -2470,7 +2470,7 @@ static void cmd_write(int argc, char *argv[])
 	gatt_write_attribute(default_attr, argc, argv);
 }
 
-#ifdef BLUEZX
+#ifdef BLUEZX9
 static void cmd_push(int argc, char *argv[])
 {
 	if (!default_attr) {
@@ -3189,8 +3189,8 @@ static const struct bt_shell_menu gatt_menu = {
 	.name = "gatt",
 	.desc = "Generic Attribute Submenu",
 	.entries = {
-#ifdef BLUEZX
-	{ "read_chrc", "service.uuid chrc.uuid", bluezx_cmd_read_chrc, "Read characteristic value" },
+#ifdef BLUEZX9
+	{ "read_chrc", "service.uuid chrc.uuid", bluezx9_cmd_read_chrc, "Read characteristic value" },
 #endif
 	{ "list-attributes", "[dev/local]", cmd_list_attributes,
 				"List attributes", dev_generator },
@@ -3201,7 +3201,7 @@ static const struct bt_shell_menu gatt_menu = {
 	{ "read", "[offset]", cmd_read, "Read attribute value" },
 	{ "write", "<data=xx xx ...> [offset] [type]", cmd_write,
 						"Write attribute value" },
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	{ "push", "<filename>", cmd_push, "Push a file" },
 	{ "stop", NULL, cmd_stop, "Stop pushing" },
 #endif
@@ -3249,7 +3249,7 @@ static const struct bt_shell_menu gatt_menu = {
 static const struct bt_shell_menu main_menu = {
 	.name = "main",
 	.entries = {
-#ifdef BLUEZX
+#ifdef BLUEZX9
 	{ "repeater",     NULL,       cmd_repeater, "Repeater" },
 	{ "debug",        "[level]",  cmd_debug, "Set Debug Level 0~4" },
 #endif
@@ -3334,8 +3334,8 @@ static const struct bt_shell_opt opt = {
 static void client_ready_cb(GDBusClient *client, void *user_data)
 {
 	DBG_WN_LN(DBG_TXT_ENTER);
-#ifdef BLUEZX
-	bluezx_client_ready_cb(client, user_data);
+#ifdef BLUEZX9
+	bluezx9_client_ready_cb(client, user_data);
 #endif
 	setup_standard_input();
 }
